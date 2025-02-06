@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LinearGradient } from 'expo-linear-gradient';
-import CheckBox from '@react-native-community/checkbox';
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
 
   const handleLogin = () => {
     Alert.alert('Login Successful');
@@ -18,55 +16,46 @@ const LoginScreen = ({ navigation }) => {
   return (
     <ImageBackground source={require('../assets/images/loginBackground.png')} style={styles.background}>
       <View style={styles.container}>
-        <LinearGradient colors={['#BE1E2D', '#F7941D']} style={styles.gradientBorder} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-          <View style={styles.innerContainer}>
-            <Image source={require('../assets/images/logo.png')} style={styles.logo} resizeMode="contain" />
-            <Text style={styles.title}>
-              BUILD TODAY, CREATE VALUE TOMORROW
-            </Text>
-            <LinearGradient colors={['#BE1E2D', '#F7941D']} style={styles.inputBorder} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Username"
-                  value={username}
-                  onChangeText={setUsername}
-                />
-              </View>
-            </LinearGradient>
-            <LinearGradient colors={['#BE1E2D', '#F7941D']} style={styles.inputBorder} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-              <View style={styles.passwordContainer}>
-                <TextInput
-                  style={styles.passwordInput}
-                  placeholder="Password"
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry={!isPasswordVisible}
-                />
-                <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
-                  <Icon name={isPasswordVisible ? 'visibility' : 'visibility-off'} size={24} color="gray" />
-                </TouchableOpacity>
-              </View>
-            </LinearGradient>
-            <View style={styles.rememberMeContainer}>
-              <CheckBox
-                value={rememberMe}
-                onValueChange={setRememberMe}
-                boxType="square"
-                tintColors={{ true: '#BE1E2D', false: 'gray' }}
+        <View style={styles.innerContainer}>
+          <Image source={require('../assets/images/logo.png')} style={styles.logo} resizeMode="contain" />
+          <Text style={styles.title}>
+            BUILD TODAY, CREATE VALUE TOMORROW
+          </Text>
+          <Text style={styles.inputTitle}>Tên đăng nhập</Text>
+          <LinearGradient colors={['#BE1E2D', '#F7941D']} style={styles.inputBorder} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="Username"
+                value={username}
+                onChangeText={setUsername}
               />
-              <Text style={styles.rememberMeText}>Remember Me</Text>
             </View>
-            <TouchableOpacity onPress={handleLogin}>
-              <LinearGradient colors={['#BE1E2D', '#F7941D']} style={styles.button} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-                <Text style={styles.buttonText}>Login</Text>
-              </LinearGradient>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-              <Text style={styles.switchText}>Don't have an account? Register</Text>
-            </TouchableOpacity>
-          </View>
-        </LinearGradient>
+          </LinearGradient>
+          <Text style={styles.inputTitle}>Mật khẩu</Text>
+          <LinearGradient colors={['#BE1E2D', '#F7941D']} style={styles.inputBorder} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.passwordInput}
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!isPasswordVisible}
+              />
+              <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
+                <Icon name={isPasswordVisible ? 'visibility' : 'visibility-off'} size={24} color="gray" />
+              </TouchableOpacity>
+            </View>
+          </LinearGradient>
+          <TouchableOpacity onPress={handleLogin}>
+            <LinearGradient colors={['#BE1E2D', '#F7941D']} style={styles.button} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+              <Text style={styles.buttonText}>Login</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.switchText}>Don't have an account? Register</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ImageBackground>
   );
@@ -84,17 +73,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 16,
-  },
-  gradientBorder: {
-    padding: 2,
-    borderRadius: 10,
-    width: '100%',
-    maxWidth: 400,
+    width: '100%', // Ensure the container takes full width
   },
   innerContainer: {
     backgroundColor: 'rgba(255, 255, 255, 0.8)', // White background with 80% opacity
     padding: 20,
-    borderRadius: 10,
+    borderRadius: 20,
     alignItems: 'center',
     width: '100%',
   },
@@ -104,10 +88,19 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   title: {
+    color: '#262262',
     fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 16,
     textAlign: 'center',
     width: '100%',
+  },
+  inputTitle: {
+    color: '#000',
+    fontSize: 16,
+    textAlign: 'left',
+    width: '100%',
+    marginTop: 10,
   },
   inputBorder: {
     width: '100%',
@@ -139,19 +132,11 @@ const styles = StyleSheet.create({
   passwordInput: {
     flex: 1,
   },
-  rememberMeContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 8,
-  },
-  rememberMeText: {
-    marginLeft: 8,
-    fontSize: 16,
-  },
   button: {
+    width: '100%',
     paddingVertical: 12,
     paddingHorizontal: 32,
-    borderRadius: 25,
+    borderRadius: 10,
     marginTop: 16,
     alignItems: 'center',
   },
@@ -161,7 +146,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   switchText: {
-    color: '#007BFF',
+    color: '#000',
     marginTop: 16,
     fontSize: 16,
   },
