@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import DashBoard from './screens/dashBoard';
 import ProjectManager from './screens/projectManager';
 import JobManager from './screens/jobManager';
@@ -16,7 +17,36 @@ const CustomDrawerContent = (props) => {
       <View style={styles.logoContainer}>
         <Image source={require('./assets/images/logo.png')} style={styles.logo} />
       </View>
-      <DrawerItemList {...props} />
+      <DrawerItem
+        label="Dash Board"
+        icon={() => <Icon name="dashboard" size={24} color="gray" />}
+        onPress={() => props.navigation.navigate('Dash Board')}
+      />
+      <DrawerItem
+        label="Project Manager"
+        icon={() => <Icon name="folder" size={24} color="gray" />}
+        onPress={() => props.navigation.navigate('Project Manager')}
+      />
+      <DrawerItem
+        label="Job Manager"
+        icon={() => <Icon name="work" size={24} color="gray" />}
+        onPress={() => props.navigation.navigate('Job Manager')}
+      />
+      <DrawerItem
+        label="Recomend Manager"
+        icon={() => <Icon name="thumb-up" size={24} color="gray" />}
+        onPress={() => props.navigation.navigate('Recomend Manager')}
+      />
+      <DrawerItem
+        label="Report Manager"
+        icon={() => <Icon name="bar-chart" size={24} color="gray" />}
+        onPress={() => props.navigation.navigate('Report Manager')}
+      />
+      <DrawerItem
+        label="Administration"
+        icon={() => <Icon name="settings" size={24} color="gray" />}
+        onPress={() => props.navigation.navigate('Administration')}
+      />
     </DrawerContentScrollView>
   );
 };
