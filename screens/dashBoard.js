@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Dimensions, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { PieChart } from 'react-native-chart-kit';
 import { Svg, Circle } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
+import { projectData, statusCounts } from './data/projectData'; // Import project data and status counts
+
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -14,35 +16,35 @@ const DashBoard = () => {
   const data = [
     {
       name: 'Ongoing',
-      population: 5,
+      population: statusCounts.Ongoing || 0,
       color: '#3A82EF',
       legendFontColor: '#000',
       legendFontSize: 15,
     },
     {
       name: 'Delayed',
-      population: 2,
+      population: statusCounts.Delayed || 0,
       color: '#EE3CD2',
       legendFontColor: '#000',
       legendFontSize: 15,
     },
     {
       name: 'Deadline',
-      population: 4,
+      population: statusCounts.Deadline || 0,
       color: '#FFB038',
       legendFontColor: '#000',
       legendFontSize: 15,
     },
     {
       name: 'Slowed',
-      population: 5,
+      population: statusCounts.Slowed || 0,
       color: '#FF495F',
       legendFontColor: '#000',
       legendFontSize: 15,
     },
     {
       name: 'Completed',
-      population: 4,
+      population: statusCounts.Completed || 0,
       color: '#5EE173',
       legendFontColor: '#000',
       legendFontSize: 15,
